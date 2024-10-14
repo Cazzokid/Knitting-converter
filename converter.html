@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knitting Converter</title>
+</head>
+
+<body>
+    <h1>Knitting Converter</h1>
+    <h2>Enter only in stitches</h2>
+    <label for="original1">Original 10x10 width: </label>
+    <input type="number" id="original1" />
+    <br>
+    <label for="original2">Original 10x10 height: </label>
+    <input type="number" id="original2" />
+    <br>
+    <br>
+    <label for="new1">New 10x10 width: </label>
+    <input type="number" id="new1" />
+    <br>
+    <label for="new2">New 10x10 height: </label>
+    <input type="number" id="new2" />
+
+    <button onclick="convertgauge()">Convert</button>
+
+    <p>Width Multiplier</p>
+    <p id="result"></p>
+    <p>Height Multiplier</p>
+    <p id="result2"></p>
+
+    <label for="cm"> cm in old gage </label>
+    <input type="number" id="cm" />
+    <button onclick="cmconverter()">Convert</button>
+
+    <p>width cm in new gage</p>
+    <p id="resultcm1"></p>
+    <p>height cm in new gage</p>
+    <p id="resultcm2"></p>
+
+    <script>
+        function convertgauge() {
+            const input = document.getElementById("original1");
+            const input2 = document.getElementById("original2");
+            const input3 = document.getElementById("new1");
+            const input4 = document.getElementById("new2");
+
+            const newgaugewidth = input3.value / input.value;
+            const newgaugeheight = input4.value / input2.value;
+
+            document.getElementById("result").innerHTML = newgaugewidth;
+            document.getElementById("result2").innerHTML = newgaugeheight;
+        }
+
+        function cmconverter() {
+        const cm = document.getElementById("cm").value;
+        const oldWidthStitches = document.getElementById("original1").value;
+        const newWidthStitches = document.getElementById("new1").value;
+        const oldHeightStitches = document.getElementById("original2").value;
+        const newHeightStitches = document.getElementById("new2").value;
+
+        // st per cm 
+        const stitchesPerCmOldWidth = oldWidthStitches / 10;
+        const stitchesPerCmOldHeight = oldHeightStitches / 10;
+
+        const stitchesPerCmNewWidth = newWidthStitches / 10;
+        const stitchesPerCmNewHeight = newHeightStitches / 10;
+
+        const newStitchesWidth = cm * stitchesPerCmNewWidth;
+        const newStitchesHeight = cm * stitchesPerCmNewHeight;
+
+        document.getElementById("resultcm1").innerHTML = newStitchesWidth.toFixed(2);
+        document.getElementById("resultcm2").innerHTML = newStitchesHeight.toFixed(2);
+    }
+    </script>
+</body>
+</html>
